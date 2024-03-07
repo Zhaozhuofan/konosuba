@@ -1,0 +1,67 @@
+﻿<Window x:Class="konosuba.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:local="clr-namespace:konosuba.Views"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:konosuba.ViewModels"
+        Title="MainWindow"
+        Width="1500"
+        Height="1200"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="ToolWindow"
+        ResizeMode="NoResize"
+        mc:Ignorable="d">
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid ShowGridLines="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Image Grid.RowSpan="3"
+               Source="http://konosuba.com/1st/goods/img/bg_body.jpg"
+               Stretch="None" />
+        <Image Grid.Row="0"
+               Width="406"
+               Height="211"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Source="http://konosuba.com/1st/img//common/logo.png" />
+        <ListBox x:Name="iconList"
+                 Grid.Row="1"
+                 Background="Transparent"
+                 ItemsSource="{Binding CharacterList}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Width="800"
+                               Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Image Margin="5,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top"
+                           Source="{Binding IconURL}"
+                           Stretch="None" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Image Grid.Row="2"
+               Source="http://konosuba.com/1st/character/img/bg-chara.png"
+               Stretch="None" />
+        <Image Grid.Row="2"
+               Source="{Binding ElementName=iconList, Path=SelectedItem.PortraitURL}"
+               Stretch="None" />
+    </Grid>
+</Window>
