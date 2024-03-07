@@ -9,38 +9,64 @@
         Title="MainWindow"
         Width="1500"
         Height="1200"
+        d:DataContext="{d:DesignInstance Type=vm:MainWindowViewModel}"
+        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         WindowStyle="ToolWindow"
-        ResizeMode="NoResize"
         mc:Ignorable="d">
-    <Window.DataContext>
-        <vm:MainWindowViewModel />
-    </Window.DataContext>
+
+    <!-- WindowLoaded事件 -->
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
+
     <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-
+        <!-- 背景图 -->
         <Image Grid.RowSpan="3"
                Source="http://konosuba.com/1st/goods/img/bg_body.jpg"
                Stretch="None" />
+        <!-- Logo图 -->
         <Image Grid.Row="0"
                Width="406"
                Height="211"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
                Source="http://konosuba.com/1st/img//common/logo.png" />
+        <!-- iconListbox -->
         <ListBox x:Name="iconList"
                  Grid.Row="1"
                  Background="Transparent"
                  ItemsSource="{Binding CharacterList}">
+            <!-- 清除ListBox中的item的原有样式 -->
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                <Border>
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <!-- 清除ListBox的原有样式 -->
+            <ListBox.Template>
+                <ControlTemplate TargetType="ListBox">
+                    <Border>
+                        <ItemsPresenter />
+                    </Border>
+                </ControlTemplate>
+            </ListBox.Template>
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Width="800"
@@ -49,17 +75,19 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Image Margin="5,0"
+                    <Image Margin="5,2"
                            HorizontalAlignment="Center"
-                           VerticalAlignment="Top"
+                           VerticalAlignment="Center"
                            Source="{Binding IconURL}"
                            Stretch="None" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <!-- 角色立绘展示用背景图 -->
         <Image Grid.Row="2"
                Source="http://konosuba.com/1st/character/img/bg-chara.png"
                Stretch="None" />
+        <!-- 绑定listBox的SelectedItem的Protrait属性,展示角色立绘 -->
         <Image Grid.Row="2"
                Source="{Binding ElementName=iconList, Path=SelectedItem.PortraitURL}"
                Stretch="None" />

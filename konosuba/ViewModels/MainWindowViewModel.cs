@@ -8,9 +8,16 @@ namespace konosuba.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase
     {
+        /// <summary>
+        /// 用于绑定到角色icon展示用的ListBox
+        /// </summary>
         [ObservableProperty]
         BindingList<Character> characterList = [];
 
+        /// <summary>
+        /// 通过拿到的角色icon和portrait信息创建character并添加给characterList
+        /// </summary>
+        /// <returns></returns>
         [RelayCommand]
         async Task Loaded()
         {

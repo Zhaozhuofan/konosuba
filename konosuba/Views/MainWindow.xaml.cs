@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using konosuba.ViewModels;
+using System.Windows;
 
 namespace konosuba.Views
 {
@@ -10,6 +11,7 @@ namespace konosuba.Views
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainWindowViewModel();
         }
     }
 }
