@@ -43,17 +43,21 @@
         <ListBox x:Name="iconList"
                  Grid.Row="1"
                  Background="Transparent"
-                 ItemsSource="{Binding CharacterList}">
+                 ItemsSource="{Binding CharacterList}"
+                 SelectedItem="1">
             <!-- 清除ListBox中的item的原有样式 -->
             <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Setter Property="Template">
                         <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                <Border>
+                            <ControlTemplate TargetType="{x:Type ContentControl}">
+                                <Grid Margin="5">
+                                    <!--<Ellipse Width="87"
+                                             Height="87" />-->
                                     <ContentPresenter HorizontalAlignment="Center"
                                                       VerticalAlignment="Center" />
-                                </Border>
+                                </Grid>
+
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -75,11 +79,20 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Image Margin="5,2"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           Source="{Binding IconURL}"
-                           Stretch="None" />
+                    <Grid>
+                        <Ellipse Width="87"
+                                 Height="87">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding IconURL}"
+                                            Stretch="None" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <!--<Image Margin="5,2"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Source="{Binding IconURL}"
+                               Stretch="None"/>-->
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
