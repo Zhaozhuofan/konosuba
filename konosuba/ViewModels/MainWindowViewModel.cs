@@ -2,7 +2,11 @@
 using CommunityToolkit.Mvvm.Input;
 using konosuba.Helpers;
 using konosuba.Models;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Data;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace konosuba.ViewModels
 {
@@ -13,6 +17,8 @@ namespace konosuba.ViewModels
         /// </summary>
         [ObservableProperty]
         BindingList<Character> characterList = [];
+
+
 
         /// <summary>
         /// 通过拿到的角色icon和portrait信息创建character并添加给characterList
@@ -32,6 +38,8 @@ namespace konosuba.ViewModels
             if (Icon.Count == Portrait.Count)
                 for (int i = 0; i < Portrait.Count; i++)
                     characterList.Add(new(Icon[i], Portrait[i]));
+
+            
         }
     }
 }

@@ -34,11 +34,10 @@
                Stretch="None" />
         <!-- Logo图 -->
         <Image Grid.Row="0"
-               Width="406"
-               Height="211"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
-               Source="http://konosuba.com/1st/img//common/logo.png" />
+               Source="http://konosuba.com/1st/img//common/logo.png"
+               Stretch="None" />
         <!-- iconListbox -->
         <ListBox x:Name="iconList"
                  Grid.Row="1"
@@ -51,13 +50,17 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ContentControl}">
-                                <Grid Margin="5">
-                                    <!--<Ellipse Width="87"
-                                             Height="87" />-->
+                                <Grid Width="87"
+                                      Height="87"
+                                      Margin="10,0">
+                                    <Grid.Clip>
+                                        <EllipseGeometry Center="43.5 43.5"
+                                                         RadiusX="43.5"
+                                                         RadiusY="43.5" />
+                                    </Grid.Clip>
                                     <ContentPresenter HorizontalAlignment="Center"
                                                       VerticalAlignment="Center" />
                                 </Grid>
-
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -73,26 +76,33 @@
             </ListBox.Template>
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Width="800"
-                               Orientation="Horizontal" />
+                    <!--<WrapPanel Width="1450"
+                               HorizontalAlignment="Center"
+                               Orientation="Horizontal" />-->
+                    <StackPanel HorizontalAlignment="Center"
+                                Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Ellipse Width="87"
+
+                    <!--<Ellipse
+                                 Width="87"
                                  Height="87">
                             <Ellipse.Fill>
-                                <ImageBrush ImageSource="{Binding IconURL}"
+                                <ImageBrush ImageSource="{Binding IconURL, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
                                             Stretch="None" />
                             </Ellipse.Fill>
-                        </Ellipse>
-                        <!--<Image Margin="5,2"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Source="{Binding IconURL}"
-                               Stretch="None"/>-->
-                    </Grid>
+                        </Ellipse>-->
+                    <Image Source="{Binding IconURL}"
+                           Stretch="None">
+                        <Image.Clip>
+                            <EllipseGeometry Center="43.5,43.5"
+                                             RadiusX="87"
+                                             RadiusY="87" />
+                        </Image.Clip>
+                    </Image>
+
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
