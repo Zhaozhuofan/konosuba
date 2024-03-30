@@ -1,5 +1,4 @@
 ﻿using konosuba.Helpers;
-using konosuba.Models;
 using konosuba.ViewModels;
 using konosuba.Views;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,7 +22,7 @@ namespace konosuba
             container.AddSingleton<ViewModelBase>();
             container.AddTransient<MainWindowViewModel>();
             container.AddTransient<MainWindow>();
-            
+
             ServiceProvider = container.BuildServiceProvider();
         }
 

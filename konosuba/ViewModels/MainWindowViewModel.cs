@@ -2,11 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using konosuba.Helpers;
 using konosuba.Models;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows.Data;
-using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace konosuba.ViewModels
 {
@@ -33,13 +29,14 @@ namespace konosuba.ViewModels
                 Icon[i] = "http://konosuba.com/1st/character/" + Icon[i];
 
             for (int i = 0; i < Portrait.Count; i++)
-                Portrait[i]= "http://konosuba.com/1st/character/" + Portrait[i];
+                Portrait[i] = "http://konosuba.com/1st/character/" + Portrait[i];
 
             if (Icon.Count == Portrait.Count)
                 for (int i = 0; i < Portrait.Count; i++)
                     characterList.Add(new(Icon[i], Portrait[i]));
-
-            
         }
+
+        [RelayCommand]
+        void Close() =>App.Current.MainWindow.Close();
     }
 }
