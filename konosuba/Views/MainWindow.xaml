@@ -16,14 +16,13 @@
         WindowStyle="None"
         Icon="/konosuba;Component/Resources/Images/twitter_icon8.png"
         mc:Ignorable="d">
-    <!-- 加个圆角 -->
+    
     <Window.Style>
         <Style TargetType="{x:Type Window}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Window}">
-                        <Border Background="Transparent"
-                                CornerRadius="100">
+                        <Border Background="Transparent">
                             <ContentPresenter />
                         </Border>
                     </ControlTemplate>
@@ -80,13 +79,17 @@
             </Style>
         </Grid.Resources>
         <!-- 背景图 -->
-        <Border Grid.RowSpan="3"
-                Background="Transparent"
-                CornerRadius="15">
-            <Image Source="http://konosuba.com/1st/goods/img/bg_body.jpg"
+        <!--顺便加个圆角效果-->
+      
+            <Image 
+                Grid.RowSpan="3"
+                Source="http://konosuba.com/1st/goods/img/bg_body.jpg"
                    Stretch="None">
+                <Image.Clip>
+                    <RectangleGeometry RadiusX="30" RadiusY="30" Rect="0,0,1500,1200"/>
+                </Image.Clip>
             </Image>
-        </Border>
+        
 
         <!-- 关闭按钮 -->
         <Button Margin="1380,-150,0,0"
@@ -96,6 +99,7 @@
         <Image Grid.Row="0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
+               Margin="20 20 0 0"
                Source="http://konosuba.com/1st/img//common/logo.png"
                Stretch="None" />
         <!-- iconListbox -->
