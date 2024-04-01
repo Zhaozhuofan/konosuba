@@ -107,7 +107,7 @@
                  Grid.Row="1"
                  Background="Transparent"
                  ItemsSource="{Binding CharacterList}"
-                 SelectedItem="1">
+                 SelectedIndex="0">
             <!-- 清除ListBox中的item的原有样式 -->
             <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
