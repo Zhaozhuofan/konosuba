@@ -8,15 +8,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:konosuba.ViewModels"
         Title="MainWindow"
-        Width="1500"
-        Height="1200"
+        Width="1024"
+        Height="768"
         d:DataContext="{d:DesignInstance Type=vm:MainWindowViewModel}"
         AllowsTransparency="True"
+        Icon="/konosuba;Component/Resources/Images/twitter_icon8.png"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        Icon="/konosuba;Component/Resources/Images/twitter_icon8.png"
         mc:Ignorable="d">
-    
+
     <Window.Style>
         <Style TargetType="{x:Type Window}">
             <Setter Property="Template">
@@ -30,15 +30,15 @@
             </Setter>
         </Style>
     </Window.Style>
-    
-    <!--MVVM模式实现WindowLoaded事件 -->
+
+    <!-- MVVM模式实现WindowLoaded事件 -->
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    
-    <!--MVVM模式实现鼠标拖动窗口-->
+
+    <!-- MVVM模式实现鼠标拖动窗口 -->
     <i:Interaction.Behaviors>
         <b:MouseDragBehavior />
     </i:Interaction.Behaviors>
@@ -48,10 +48,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.Resources>
-            <!--关闭按钮的样式-->
+            <!-- 关闭按钮的样式 -->
             <Style TargetType="{x:Type Button}">
                 <Setter Property="Template">
                     <Setter.Value>
@@ -79,48 +79,51 @@
             </Style>
         </Grid.Resources>
         <!-- 背景图 -->
-        <!--顺便加个圆角效果-->
-      
-            <Image 
-                Grid.RowSpan="3"
-                Source="http://konosuba.com/1st/goods/img/bg_body.jpg"
-                   Stretch="None">
-                <Image.Clip>
-                    <RectangleGeometry RadiusX="30" RadiusY="30" Rect="0,0,1500,1200"/>
-                </Image.Clip>
-            </Image>
-        
+        <!-- 顺便加个圆角效果 -->
+
+        <Image Grid.RowSpan="3"
+               Source="http://konosuba.com/1st/goods/img/bg_body.jpg"
+               Stretch="UniformToFill">
+            <Image.Clip>
+                <RectangleGeometry RadiusX="30"
+                                   RadiusY="30"
+                                   Rect="0,0,1024,768" />
+            </Image.Clip>
+        </Image>
+
 
         <!-- 关闭按钮 -->
-        <Button Margin="1380,-150,0,0"
+        <Button Margin="900,-50,0,0"
+                FontSize="50"
                 Command="{Binding CloseCommand}"
                 Content="&#xe622;" />
         <!-- Logo图 -->
         <Image Grid.Row="0"
+               Height="120"
+               Margin="20,10,0,10"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
-               Margin="20 20 0 0"
                Source="http://konosuba.com/1st/img//common/logo.png"
-               Stretch="None" />
+               Stretch="Uniform" />
         <!-- iconListbox -->
         <ListBox x:Name="iconList"
                  Grid.Row="1"
                  Background="Transparent"
                  ItemsSource="{Binding CharacterList}"
-                 SelectedItem="1">
+                 SelectedIndex="0">
             <!-- 清除ListBox中的item的原有样式 -->
             <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ContentControl}">
-                                <Grid Width="87"
-                                      Height="87"
-                                      Margin="10,0">
+                                <Grid Width="70"
+                                      Height="70"
+                                      Margin="8,0">
                                     <Grid.Clip>
-                                        <EllipseGeometry Center="43.5 43.5"
-                                                         RadiusX="43.5"
-                                                         RadiusY="43.5" />
+                                        <EllipseGeometry Center="35 35"
+                                                         RadiusX="35"
+                                                         RadiusY="35" />
                                     </Grid.Clip>
                                     <ContentPresenter HorizontalAlignment="Center"
                                                       VerticalAlignment="Center" />
@@ -140,43 +143,27 @@
             </ListBox.Template>
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <!--<WrapPanel Width="1450"
-                               HorizontalAlignment="Center"
-                               Orientation="Horizontal" />-->
+                    
                     <StackPanel HorizontalAlignment="Center"
                                 Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-
-                    <!--<Ellipse
-                                 Width="87"
-                                 Height="87">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="{Binding IconURL, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
-                                            Stretch="None" />
-                            </Ellipse.Fill>
-                        </Ellipse>-->
                     <Image Source="{Binding IconURL}"
-                           Stretch="None">
-                        <Image.Clip>
-                            <EllipseGeometry Center="43.5,43.5"
-                                             RadiusX="87"
-                                             RadiusY="87" />
-                        </Image.Clip>
+                           Stretch="Uniform">
                     </Image>
 
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <!-- 角色立绘展示用背景图 -->
-        <Image Grid.Row="2"
+        <Image  Grid.Row="2"
                Source="http://konosuba.com/1st/character/img/bg-chara.png"
-               Stretch="None" />
+               Stretch="Uniform" />
         <!-- 绑定listBox的SelectedItem的Protrait属性,展示角色立绘 -->
         <Image Grid.Row="2"
                Source="{Binding ElementName=iconList, Path=SelectedItem.PortraitURL}"
-               Stretch="None" />
+               Stretch="Uniform" />
     </Grid>
 </Window>
